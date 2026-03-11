@@ -1,0 +1,682 @@
+@use "sass:map";
+@use "mixin" as *;
+@use "variables" as *;
+
+// ==========================================================================
+// 1. Flexbox（レイアウト）
+// ==========================================================================
+.u-flex {
+  display: flex !important;
+}
+
+.u-flex-inline {
+  display: inline-flex !important;
+}
+
+.u-flex-wrap {
+  flex-wrap: wrap !important;
+}
+
+.u-flex-nowrap {
+  flex-wrap: nowrap !important;
+}
+
+.u-flex-col {
+  flex-direction: column !important;
+}
+
+@include sp {
+  .u-flex-sp-col {
+    flex-direction: column !important;
+  }
+}
+
+.u-flex-1 {
+  flex: 1 1 0% !important;
+}
+
+.u-flex-shrink-0 {
+  flex-shrink: 0 !important;
+}
+
+// 中央・端寄せ
+.u-justify-center {
+  justify-content: center !important;
+}
+
+.u-justify-between {
+  justify-content: space-between !important;
+}
+
+.u-justify-end {
+  justify-content: flex-end !important;
+}
+
+.u-items-center {
+  align-items: center !important;
+}
+
+.u-items-start {
+  align-items: flex-start !important;
+}
+
+.u-items-end {
+  align-items: flex-end !important;
+}
+
+.u-items-stretch {
+  align-items: stretch !important;
+}
+
+.u-self-start {
+  align-self: flex-start !important;
+}
+
+.u-align-center {
+  align-content: center !important;
+}
+
+// ==========================================================================
+// 2. 余白（Margin/Padding）
+// 0, 5, 10 ... 60px を自動生成
+// ==========================================================================
+@for $i from 0 through 20 {
+  // 60pxまでなら12まで回す (12 * 5 = 60)
+  $size: $i * 5;
+
+  // --- Margin ---
+  .u-m-#{$size} {
+    margin: #{$size}px !important;
+  }
+
+  .u-mt-#{$size} {
+    margin-top: #{$size}px !important;
+  }
+
+  .u-mb-#{$size} {
+    margin-bottom: #{$size}px !important;
+  }
+
+  .u-ml-#{$size} {
+    margin-left: #{$size}px !important;
+  }
+
+  .u-mr-#{$size} {
+    margin-right: #{$size}px !important;
+  }
+
+  .u-mx-#{$size} {
+    margin-left: #{$size}px !important;
+    margin-right: #{$size}px !important;
+  }
+
+  .u-my-#{$size} {
+    margin-top: #{$size}px !important;
+    margin-bottom: #{$size}px !important;
+  }
+
+  // --- Padding ---
+  .u-p-#{$size} {
+    padding: #{$size}px !important;
+  }
+
+  .u-pt-#{$size} {
+    padding-top: #{$size}px !important;
+  }
+
+  .u-pb-#{$size} {
+    padding-bottom: #{$size}px !important;
+  }
+
+  .u-pl-#{$size} {
+    padding-left: #{$size}px !important;
+  }
+
+  .u-pr-#{$size} {
+    padding-right: #{$size}px !important;
+  }
+
+  .u-px-#{$size} {
+    padding-left: #{$size}px !important;
+    padding-right: #{$size}px !important;
+  }
+
+  .u-py-#{$size} {
+    padding-top: #{$size}px !important;
+    padding-bottom: #{$size}px !important;
+  }
+
+  @include sp {
+    .u-mt-#{$size}-sp {
+      margin-top: #{$size}px !important;
+    }
+
+    .u-mr-#{$size}-sp {
+      margin-right: #{$size}px !important;
+    }
+
+    .u-mb-#{$size}-sp {
+      margin-bottom: #{$size}px !important;
+    }
+
+    .u-ml-#{$size}-sp {
+      margin-left: #{$size}px !important;
+    }
+
+    .u-pt-#{$size}-sp {
+      padding-top: #{$size}px !important;
+    }
+
+    .u-pr-#{$size}-sp {
+      padding-right: #{$size}px !important;
+    }
+
+    .u-pb-#{$size}-sp {
+      padding-bottom: #{$size}px !important;
+    }
+
+    .u-pl-#{$size}-sp {
+      padding-left: #{$size}px !important;
+    }
+  }
+}
+
+.u-mx-auto {
+  margin: auto !important;
+}
+
+.u-text-note {
+  font-size: 12px;
+}
+
+@include sp {
+
+  // SP時のみマージンオート（中央寄せ）
+  .u-m-auto-sp {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+// ==========================================================================
+// 3. テキスト・表示制御
+// ==========================================================================
+.u-text-center {
+  text-align: center !important;
+}
+
+.u-text-right {
+  text-align: right !important;
+}
+
+.u-text-left {
+  text-align: left !important;
+}
+
+.u-text-bold {
+  font-weight: bold !important;
+}
+
+.u-nowrap {
+  white-space: nowrap !important;
+}
+
+.u-db {
+  display: block !important;
+}
+
+.u-dib {
+  display: inline-block !important;
+}
+
+.u-dn {
+  display: none !important;
+}
+
+// ==========================================================================
+// 4. コンテナクエリ（親要素に指定）
+// ==========================================================================
+.u-container {
+  container-type: inline-size !important;
+  width: 100%;
+}
+
+// ==========================================================================
+// 5. 画像のレスポンシブ対応
+// ==========================================================================
+.u-img-fluid {
+  max-width: 100% !important;
+  height: auto !important;
+  vertical-align: middle;
+}
+
+// ==========================================================================
+// 6. Grid（レイアウト）
+// ==========================================================================
+.u-grid {
+  display: grid !important;
+}
+
+// カラム数（1〜6カラムを自動生成）
+@for $i from 1 through 6 {
+  .u-grid-cols-#{$i} {
+    grid-template-columns: repeat(#{$i}, 1fr) !important;
+  }
+}
+
+// 隙間（Gap）
+// 0, 10, 20, 30, 40, 50px を生成
+@for $i from 0 through 20 {
+  $size: $i * 5;
+
+  .u-gap-#{$size} {
+    gap: #{$size}px !important;
+  }
+}
+
+@include sp {
+
+  // SP時のGap調整
+  @for $i from 0 through 10 {
+    $size: $i * 5;
+
+    .u-gap-sp-#{$size} {
+      gap: #{$size}px !important;
+    }
+  }
+}
+
+// 比率指定のカラム（合計10分割のパターン）
+@for $i from 1 through 9 {
+  $remaining: 10 - $i;
+
+  .u-grid-cols-#{$i}-#{$remaining} {
+    grid-template-columns: #{$i}fr #{$remaining}fr !important;
+  }
+}
+
+.u-grid-cols-1-2 {
+  grid-template-columns: 1fr 2fr !important;
+}
+
+.u-grid-cols-2-1 {
+  grid-template-columns: 2fr 1fr !important;
+}
+
+@include sp {
+
+  // SP時に縦1行にする
+  .u-grid-cols-sp-1 {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+}
+
+// 縦方向・横方向のGapを個別に作りたい場合
+@for $i from 1 through 6 {
+  $val: $i * 10;
+
+  // 横の溝 (column-gap)
+  .u-gap-x-#{$val} {
+    column-gap: #{$val}px !important;
+  }
+
+  // 縦の溝 (row-gap)
+  .u-gap-y-#{$val} {
+    row-gap: #{$val}px !important;
+  }
+}
+
+// ==========================================================================
+// 7. 特定サイズのコンテナ（親要素）
+// ==========================================================================
+.u-container-1200 {
+  container-type: inline-size;
+  container-name: content1200px;
+  max-width: 1200px;
+  width: 100%;
+  margin-left: auto; // 中央寄せ
+  margin-right: auto; // 中央寄せ
+}
+
+// ==========================================================================
+// 8. アスペクト比（画像や動画の比率固定）
+// ==========================================================================
+.u-aspect-16-9 {
+  aspect-ratio: 16 / 9 !important;
+  object-fit: cover;
+}
+
+.u-aspect-1-1 {
+  aspect-ratio: 1 / 1 !important;
+  object-fit: cover;
+}
+
+.u-aspect-3-2 {
+  aspect-ratio: 3 / 2 !important;
+  object-fit: cover;
+}
+
+// ==========================================================================
+// 9. 重なり順と配置（Z-index / Position）
+// ==========================================================================
+.u-relative {
+  position: relative !important;
+}
+
+.u-absolute {
+  position: absolute !important;
+}
+
+.u-z-10 {
+  z-index: 10 !important;
+}
+
+.u-z-20 {
+  z-index: 20 !important;
+}
+
+.u-z-max {
+  z-index: 9999 !important;
+}
+
+// ==========================================================================
+// 10. テキスト省略（三点リーダー ...）
+// ==========================================================================
+// 1行で省略
+.u-ellipsis {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+// 2行で省略
+.u-clamp-2 {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+// ==========================================================================
+// 11. インタラクション（ホバーなど）
+// ==========================================================================
+.u-opacity-hover {
+  transition: opacity 0.3s !important;
+
+  &:hover {
+    opacity: 0.7 !important;
+  }
+}
+
+.u-pointer {
+  cursor: pointer !important;
+}
+
+// ==========================================================================
+// 12. 画像ズームホバー
+// ==========================================================================
+.u-img-zoom {
+  overflow: hidden !important; // はみ出しをカット
+
+  img {
+    transition: transform 0.5s ease !important;
+  }
+
+  &:hover img {
+    transform: scale(1.1) !important; // 1.1倍に拡大
+    opacity: 0.8 !important; // 同時に少し透かす
+  }
+}
+
+// ==========================================================================
+// 13. 幅サイズ（Width / Max-Width / Min-Width）
+// ==========================================================================
+$widths: 20, 25, 30, 40, 50, 60, 70, 75, 80, 100;
+
+@each $width in $widths {
+
+  // --- PC/共通 ---
+  .u-max-w#{$width}p {
+    max-width: #{$width}#{"%"} !important;
+  }
+
+  .u-w#{$width}p {
+    width: #{$width}#{"%"} !important;
+  }
+
+  .u-min-w#{$width}p {
+    min-width: #{$width}#{"%"} !important;
+  }
+
+  // --- SP専用（mixinを活用） ---
+  @include sp {
+    .u-max-w#{$width}p-sp {
+      max-width: #{$width}#{"%"} !important;
+    }
+
+    .u-w#{$width}p-sp {
+      width: #{$width}#{"%"} !important;
+    }
+
+    .u-min-w#{$width}p-sp {
+      min-width: #{$width}#{"%"} !important;
+    }
+  }
+}
+
+// 最小幅（px固定）
+$min-widths-px: 100, 150, 200;
+
+@each $w-px in $min-widths-px {
+  .u-min-w#{$w-px} {
+    min-width: #{$w-px}px !important;
+  }
+
+  // --- SP専用（mixinを活用） ---
+  @include sp {
+    .u-min-w#{$w-px}-sp {
+      min-width: #{$w-px}px !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   14. 高さサイズ（Height / Max-Height / Min-Height）
+   ========================================================================== */
+
+// --- %指定（Height / Max-H / Min-H） ---
+$heights-p: 25, 50, 75, 100;
+
+@each $h in $heights-p {
+
+  // 高さ固定
+  .u-h#{$h}p {
+    height: #{$h}#{"%"} !important;
+  }
+
+  // 最大高
+  .u-max-h#{$h}p {
+    max-height: #{$h}#{"%"} !important;
+  }
+
+  // 最小高
+  .u-min-h#{$h}p {
+    min-height: #{$h}#{"%"} !important;
+  }
+}
+
+// --- px指定（主に最小高や固定高で使用） ---
+$heights-px: 50, 100, 150, 200, 300, 400;
+
+@each $h-px in $heights-px {
+
+  // 高さ固定
+  .u-h#{$h-px} {
+    height: #{$h-px}px !important;
+  }
+
+  // 最小高
+  .u-min-h#{$h-px} {
+    min-height: #{$h-px}px !important;
+  }
+}
+
+// --- 特殊指定（Viewport Height 等） ---
+.u-h-vh {
+  height: 100vh !important;
+}
+
+.u-h-auto {
+  height: auto !important;
+}
+
+// ==========================================================================
+// 15. 行間（Line Height）
+// 1, 1.2, 1.4, 1.5, 1.6, 1.7, 2 を生成
+// ==========================================================================
+$line-heights: (
+  "1": 1,
+  "12": 1.2,
+  "13": 1.3,
+  "14": 1.4,
+  "15": 1.5,
+  "16": 1.6,
+  "17": 1.7,
+  "2": 2
+);
+
+@each $key, $value in $line-heights {
+  .u-lh-#{$key} {
+    line-height: $value !important;
+  }
+}
+
+// ==========================================================================
+// 16. Typography（文字設定）
+// ==========================================================================
+
+// フォントサイズ (10px 〜 100px)
+@for $i from 10 through 100 {
+  .u-f#{$i} {
+    font-size: #{$i}px !important;
+  }
+}
+
+// 太字・細字
+.u-bold {
+  font-weight: bold !important;
+}
+
+.u-font-normal {
+  font-weight: normal !important;
+}
+
+// ==========================================================================
+// 17. Border（枠線）
+// ==========================================================================
+
+// 基本の太さとスタイル (1px 〜 5px)
+@for $i from 1 through 5 {
+  .u-border-#{$i} {
+    border-width: #{$i}px !important;
+    border-style: solid !important;
+  }
+}
+
+// ボーダーの色（追加のセカンダリカラーを含む）
+.u-border-hpe-green {
+  border-color: $color-hpe-green !important;
+}
+
+.u-border-midnight {
+  border-color: $color-midnight !important;
+}
+
+.u-border-white {
+  border-color: $color-white !important;
+}
+
+.u-border-jade-green {
+  border-color: $color-jade-green !important;
+}
+
+.u-border-mint-green {
+  border-color: $color-mint-green !important;
+}
+
+.u-border-cyan {
+  border-color: $color-cyan !important;
+}
+
+.u-border-blue {
+  border-color: $color-blue !important;
+}
+
+.u-border-purple {
+  border-color: $color-purple !important;
+}
+
+.u-border-dark-teal {
+  border-color: $color-dark-teal !important;
+}
+
+.u-border-gry {
+  border-color: $color-border-gray !important;
+}
+
+// 角丸（2025年のUIでよく使うサイズ）
+.u-rounded-4 {
+  border-radius: 4px !important;
+}
+
+.u-rounded-8 {
+  border-radius: 8px !important;
+}
+
+.u-rounded-10 {
+  border-radius: 10px !important;
+}
+
+.u-rounded-full {
+  border-radius: 9999px !important;
+}
+
+.u-border-b {
+  border-bottom-style: solid !important;
+  border-bottom-width: 1px !important;
+}
+
+.u-border-t {
+  border-top-style: solid !important;
+  border-top-width: 1px !important;
+}
+
+// ==========================================================================
+// 18. Spacing with Border（境界線付き余白）
+// ==========================================================================
+
+@for $i from 0 through 12 {
+  $size: $i * 5;
+
+  .u-mb-border-#{$size} {
+    margin-bottom: #{$size}px !important;
+    padding-bottom: #{$size}px !important;
+    border-bottom: 1px solid $color-border-gray !important;
+  }
+}
+
+// ==========================================================================
+// 19. Display & Visibility（表示・非表示）
+// ==========================================================================
+
+// 完全に非表示（全デバイス共通）
+.u-hidden {
+  display: none !important;
+}
+
+// SP時のみ非表示
+@include sp {
+  .u-hidden-sp {
+    display: none !important;
+  }
+}

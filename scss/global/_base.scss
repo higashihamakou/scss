@@ -1,0 +1,13 @@
+@use "variables" as *;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+table {
+  border: {
+    collapse: collapse;
+    spacing: 0;
+  }
+  empty-cells: show;
+}

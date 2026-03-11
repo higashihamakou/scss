@@ -1,0 +1,91 @@
+@use "variables" as *;
+@use "sass:color";
+
+/* ==========================================================================
+  1. スマートフォン向けのスタイルを適用（指定幅未満）
+  デフォルトでは $bp-md(768px) 未満に適用
+   ========================================================================== */
+@mixin sp($width: $bp-md) {
+  @media (max-width: #{$width - 1px}) {
+    @content;
+  }
+}
+
+/* ==========================================================================
+  2. PC・タブレット向けのスタイルを適用（指定幅以上）
+  デフォルトでは $bp-md(768px) 以上に適用
+   ========================================================================== */
+@mixin pc($width: $bp-md) {
+  @media (min-width: $width) {
+    @content;
+  }
+}
+
+/* ==========================================================================
+  3. 要素を上下左右中央に配置（Flexbox）
+   ========================================================================== */
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ==========================================================================
+  4. アスペクト比の固定
+  画像やボックスの比率を維持し、中身を中央にフィットさせます
+  例: @include aspect(16, 9);
+   ========================================================================== */
+@mixin aspect($width: 1, $height: 1) {
+  aspect-ratio: #{$width} / #{$height};
+  object-fit: cover; // 画像が歪まないように調整
+}
+
+/* ==========================================================================
+  5. ボタンバリエーションの生成 (Modern Sass 版)
+  背景色、文字色、枠線の有無を指定してボタンを生成します
+   ========================================================================== */
+@mixin btn-style($bg-color, $text-color, $has-border: false) {
+  background-color: $bg-color;
+  color: $text-color !important;
+
+  // 枠線の設定
+  @if $has-border {
+    border: 4px solid $has-border;
+  }
+
+  @else {
+    border: 4px solid transparent;
+  }
+
+  &:hover {
+
+    // 1. 背景が透明（transparent）の場合のホバー処理
+    @if $bg-color ==transparent {
+      border-color: $cta-lm-color;
+    }
+
+    // 2. 背景が白の場合
+    @else if $bg-color ==#ffffff {
+      background-color: color.scale($bg-color, $lightness: -20%);
+    }
+
+    // 3. それ以外の通常色
+    @else {
+      background-color: color.scale($bg-color, $lightness: 20%);
+    }
+
+    text-decoration: none;
+  }
+}
+
+/* ==========================================================================
+  6. トランジション設定の共通化
+  すべてのアニメーションに 0.2s の ease を適用します
+   ========================================================================== */
+
+@mixin transition-default {
+  -webkit-transition: all ease .2s;
+  -moz-transition: all ease .2s;
+  -ms-transition: all ease .2s;
+  transition: all ease .2s;
+}

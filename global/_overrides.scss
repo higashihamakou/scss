@@ -1,0 +1,113 @@
+@use "mixin" as *;
+@use "variables" as *;
+
+.subHeader {
+  padding: 20px 17px;
+
+  .titleArea {
+    width: 100%;
+    max-width: 1200px;
+  }
+}
+
+@include sp ($bp-layout-switch) {
+  .subHeader .titleArea {
+    padding: 0;
+  }
+}
+
+@include sp {
+  .subHeader .titleArea {
+    padding: 0;
+  }
+}
+
+.subNavi.library {
+  padding: 15px 17px;
+  width: 100%;
+
+  &::after {
+    content: none;
+  }
+
+  ul.customerNavi {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    position: relative;
+    float: none;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    &::after {
+      content: none;
+    }
+
+
+    .icon {
+      border: none;
+      padding: 0;
+
+      &>img {
+        width: 100px;
+        height: 100px;
+      }
+    }
+
+    .label {
+      font-size: 14px;
+      margin-top: 0;
+    }
+  }
+}
+
+@include sp ($bp-layout-switch) {
+  .subNavi.library {
+    padding: 15px 17px;
+
+    ul.customerNavi {
+      justify-content: center;
+
+      &>li a {
+        display: flex;
+      }
+    }
+  }
+}
+
+@include sp {
+
+  .subHeader.library .titleArea .h1Title span,
+  .subNavi.library {
+    display: initial;
+  }
+}
+
+.subHeader.library .h1Title {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: baseline;
+  margin-bottom: 5px;
+}
+
+.subHeader.library .titleArea .h1Title h1 {
+  line-height: 1.8;
+}
+
+.subHeader.library .titleArea .h1Title h1,
+.subHeader.library .titleArea .h1Title span {
+  margin: 0;
+}
+
+.subHeader.library .h1Title p {
+  font-size: 27px;
+}
+
+.library .h1Title span.sub_title {
+  font-size: 23px;
+  margin: 0;
+}

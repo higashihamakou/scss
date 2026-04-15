@@ -1,0 +1,79 @@
+@use "variables" as *;
+@use "mixin" as *;
+
+.l-container {
+  padding: 0 17px;
+}
+
+.l-inner {
+  max-width: $layout-width-inner;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.l-with-sidebar {
+  display: grid;
+  column-gap: 30px;
+  grid-template-areas: "sidebar main";
+  grid-template-columns: $width-sidebar 1fr;
+  align-items: start;
+
+  &__nav {
+    grid-area: sidebar;
+    position: sticky;
+    top: 40px;
+    margin-bottom: 40px;
+    line-height: 1.6;
+
+
+    @include sp($bp-layout-switch) {
+      position: relative;
+    }
+  }
+
+  &__main {
+    grid-area: main;
+    max-width: 1000px;
+    width: 100%;
+  }
+
+  // 表示を逆にする（右ナビ）
+  &--reverse {
+    grid-template-areas: "main sidebar";
+    grid-template-columns: 1fr $width-sidebar;
+  }
+
+  @include sp($bp-layout-switch) {
+    grid-template-areas:
+      "main"
+      "sidebar";
+    grid-template-columns: 1fr;
+  }
+}
+
+.l-grid-2col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  @include sp {
+    grid-template-columns: 1fr;
+  }
+}
+
+.l-grid-2to1 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+
+  @include sp {
+    grid-template-columns: 1fr;
+  }
+}
+
+.l-grid-1to2 {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+
+  @include sp {
+    grid-template-columns: 1fr;
+  }
+}
